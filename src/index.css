@@ -1,13 +1,285 @@
-body {
+body, html, #root {
+  height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  padding: 0;
+  /* font-family: 'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F6F5FF;
+}
+
+body {
+  background: linear-gradient(145deg, #f6f5ff, #ffd6e8);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+  padding: 20px;
+}
+
+main {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+}
+
+/* Typography */
+.logo {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.nav-item-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.cart-item-title:hover {
+  color: black;
+}
+
+/* Header & Footer */
+.main-header,
+header,
+footer,
+.navbar {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid #eee;
+}
+header {
+  background: white;
+  padding: 12px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+footer {
+  background: white;
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+}
+
+
+/* Navigation */
+.nav-menu a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  transition: color 0.3s;
+  font-size: 25px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.nav-menu a:hover {
+  color: #fbb1d9;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Search Box */
+.search-box input {
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #ddd;
+}
+.search-box .btn {
+  border-radius: 0 5px 5px 0;
+}
+
+/* Buttons & Inputs */
+button {
+  padding: 8px 12px;
+  margin-left: 10px;
+}
+button.btn-sm {
+  min-width: 35px;
+  text-align: center;
+}
+
+input {
+  padding: 8px;
+  width: 200px;
+}
+
+/* Forms */
+form {
+  margin-bottom: 20px;
+}
+
+/* Product Grid */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.product-card {
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  width: 200px;
+}
+
+/* Card Styling */
+.card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.03);
+}
+.card .hover-badge {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.card:hover .hover-badge {
+  opacity: 1;
+}
+
+/* Ribbon on Cards */
+.ribbon-wrapper {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ribbon {
+  font-size: 0.75rem;
+  color: white;
+  text-align: center;
+  transform: rotate(-45deg);
+  position: absolute;
+  width: 140px;
+  top: 20px;
+  left: -40px;
+  padding: 4px 0;
+  font-weight: bold;
+}
+.card .ribbon-wrapper {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.card:hover .ribbon-wrapper {
+  opacity: 1;
+}
+
+/* Cart Badge */
+.cart-badge {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 2px 6px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  font-weight: bold;
+}
+
+/* Font Awesome Cart Icon */
+.fa-shopping-cart {
+  font-size: 28px;
+}
+
+/* Quantity Controls */
+.quantity-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+/* Modal Overlay */
+.modal-overlay,
+.modal-blur-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modal-overlay {
+  background-color: rgba(0,0,0,0.7);
+}
+.modal-blur-overlay {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content */
+.modal-product-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.modal-product-image {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.modal-product-details h4 {
+  margin-bottom: 10px;
+}
+.modal-product-details p {
+  margin: 5px 0;
+}
+
+footer {
+  background: white; 
+  padding: 12px 20px;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05); 
+  text-align: center;
+  font-size: 0.9rem;
+  color: #333;
+  border-top: 1px solid #eee; 
+}
+
+footer i, footer a {
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+footer i:hover, footer a:hover {
+  color: #fbb1d9; 
+}
+.logo {
+  background: linear-gradient(45deg, #fb2e86, #8758ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
 }
