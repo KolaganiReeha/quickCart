@@ -22,7 +22,7 @@ const ProductDetail = ({ cart, increaseQty, decreaseQty }) => {
       <h3 className="mb-3"><i className="fas fa-shopping-bag me-2"></i> Product Details</h3>
       <div className="row">
         <div className="col-md-6">
-          <img src={product.thumbnail} className="img-fluid mb-3" alt={product.title} />
+          <img src={product.thumbnail} className="img-fluid mb-3" alt={product.title} loading="lazy"/>
         </div>
 
         {/* Product Info */}

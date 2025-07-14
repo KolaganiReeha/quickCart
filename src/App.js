@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, lazy, Suspense } from "react";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";
-import ProductDetail from "./pages/ProductDetail";
-import ThankYou from "./pages/ThankYou";
+
+// Lazy load pages
+const Home = lazy(() => import("./pages/Home"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const ThankYou = lazy(() => import("./pages/ThankYou"));
 
 function App() {
   const [cart, setCart] = useState([]); 
@@ -34,25 +36,31 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <Router>
       <Header cartCount={cart.reduce((sum, item) => sum + item.quantity, 0)} />
       <main>
-      <Routes>
-        <Route
-          path="/"
-          element={<Home cart={cart} increaseQty={increaseQty} decreaseQty={decreaseQty} />}
-        />
-        <Route
-          path="/cart"
-          element={<Cart cart={cart} increaseQty={increaseQty} decreaseQty={decreaseQty} />}
-        />
-        <Route path="/checkout" element={<Checkout cart={cart} />} />
-        <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/product/:id" element={<ProductDetail cart={cart} increaseQty={increaseQty} decreaseQty={decreaseQty} />} />
-      </Routes>
+        <Suspense fallback={<div className="text-center p-5">Loading...</div>}>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home cart={cart} increaseQty={increaseQty} decreaseQty={decreaseQty} />}
+            />
+            <Route
+              path="/cart"
+              element={<Cart cart={cart} increaseQty={increaseQty} decreaseQty={decreaseQty} />}
+            />
+            <Route path="/checkout" element={<Checkout cart={cart} />} />
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route
+              path="/product/:id"
+              element={<ProductDetail cart={cart} increaseQty={increaseQty} decreaseQty={decreaseQty} />}
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
-    </div>
+    </Router>
   );
 }
 
