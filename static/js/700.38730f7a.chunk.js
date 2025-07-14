@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkshopping=self.webpackChunkshopping||[]).push([[700],{700:(e,s,r)=>{r.r(s),r.d(s,{default:()=>i});r(43);var n=r(579);const i=()=>(0,n.jsxs)("div",{className:"container text-center mt-5",children:[(0,n.jsx)("h2",{children:"\ud83c\udf89 Order Confirmed!"}),(0,n.jsx)("p",{className:"mt-3",children:"Thank you for shopping with QuickCart. Your order will be delivered soon."})]})}}]);
+//# sourceMappingURL=700.38730f7a.chunk.js.map
