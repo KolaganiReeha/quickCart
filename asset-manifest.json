@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/quickCart/static/css/main.d8d2700d.css",
-    "main.js": "/quickCart/static/js/main.e408a589.js",
+    "main.js": "/quickCart/static/js/main.bbe12c6c.js",
     "static/js/936.afe4ac00.chunk.js": "/quickCart/static/js/936.afe4ac00.chunk.js",
     "static/js/533.bce23396.chunk.js": "/quickCart/static/js/533.bce23396.chunk.js",
     "static/js/63.82d841da.chunk.js": "/quickCart/static/js/63.82d841da.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/453.9f953152.chunk.js": "/quickCart/static/js/453.9f953152.chunk.js",
     "index.html": "/quickCart/index.html",
     "main.d8d2700d.css.map": "/quickCart/static/css/main.d8d2700d.css.map",
-    "main.e408a589.js.map": "/quickCart/static/js/main.e408a589.js.map",
+    "main.bbe12c6c.js.map": "/quickCart/static/js/main.bbe12c6c.js.map",
     "936.afe4ac00.chunk.js.map": "/quickCart/static/js/936.afe4ac00.chunk.js.map",
     "533.bce23396.chunk.js.map": "/quickCart/static/js/533.bce23396.chunk.js.map",
     "63.82d841da.chunk.js.map": "/quickCart/static/js/63.82d841da.chunk.js.map",
@@ -20,6 +20,6 @@
   },
   "entrypoints": [
     "static/css/main.d8d2700d.css",
-    "static/js/main.e408a589.js"
+    "static/js/main.bbe12c6c.js"
   ]
 }
