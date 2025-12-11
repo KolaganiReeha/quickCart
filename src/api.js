@@ -1,23 +1,27 @@
-const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8000";
+const API_BASE = (process.env.REACT_APP_API_URL || "http://localhost:8000").replace(/\/+$/, "");
 
 function getToken() {
   return localStorage.getItem("token");
 }
 
+function setToken(token) {
+  if (token) localStorage.setItem("token", token);
+  else localStorage.removeItem("token");
+}
+
 async function request(path, opts = {}, explicitToken = null) {
-  const url = `${API_BASE}${path}`;
+  const url = `${API_BASE}${path.startsWith("/") ? "" : "/"}${path}`;
 
   const headers = {
-    "Content-Type": "application/json",
     ...(opts.headers || {}),
   };
-  const tokenToUse = explicitToken ?? localStorage.getItem("token");
-  if (tokenToUse) headers.Authorization = `Bearer ${tokenToUse}`;
 
-  if (!headers.Authorization) {
-    const token = getToken();
-    if (token) headers.Authorization = `Bearer ${token}`;
+  if (opts.body && !headers["Content-Type"]) {
+    headers["Content-Type"] = "application/json";
   }
+
+  const tokenToUse = explicitToken ?? getToken();
+  if (tokenToUse) headers["Authorization"] = `Bearer ${tokenToUse}`;
 
   const res = await fetch(url, { ...opts, headers });
 
@@ -30,8 +34,7 @@ async function request(path, opts = {}, explicitToken = null) {
   }
 
   if (!res.ok) {
-    const errMsg =
-      (data && (data.detail || data.message || data.error)) || res.statusText;
+    const errMsg = (data && (data.detail || data.message || data.error)) || res.statusText;
     const err = new Error(errMsg);
     err.status = res.status;
     err.body = data;
@@ -41,20 +44,23 @@ async function request(path, opts = {}, explicitToken = null) {
   return data;
 }
 
-
 export async function login(email, password) {
-  return await request("/auth/token", {
+  const data = await request("/auth/token", {
     method: "POST",
     body: JSON.stringify({ email, password }),
-    headers: { "Content-Type": "application/json" },
   });
+  if (data?.access_token) setToken(data.access_token);
+  return data;
+}
+
+export function logout() {
+  setToken(null);
 }
 
 export async function register(email, password) {
   return await request("/auth/register", {
     method: "POST",
     body: JSON.stringify({ email, password }),
-    headers: { "Content-Type": "application/json" },
   });
 }
 
@@ -62,7 +68,6 @@ export async function verifyOtp(email, otp) {
   return await request("/auth/verify-otp", {
     method: "POST",
     body: JSON.stringify({ email, otp }),
-    headers: { "Content-Type": "application/json" },
   });
 }
 
@@ -93,4 +98,3 @@ export async function deleteProduct(id) {
     method: "DELETE",
   });
 }
-
