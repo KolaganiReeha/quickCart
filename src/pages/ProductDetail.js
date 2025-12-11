@@ -25,7 +25,6 @@ const ProductDetail = ({ cart, increaseQty, decreaseQty }) => {
           <img src={product.thumbnail} className="img-fluid mb-3" alt={product.title} loading="lazy"/>
         </div>
 
-        {/* Product Info */}
         <div className="col-md-6">
           <h4>{product.title}</h4>
           <p>⭐ {product.rating} ({Math.floor(product.rating * 5)} reviews)</p>

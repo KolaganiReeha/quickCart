@@ -1,12 +1,18 @@
 import { useNavigate } from "react-router-dom";
 
-const Checkout = ({ cart }) => {
+const Checkout = ({ cart, clearCart }) => {
   const navigate = useNavigate();
   const total = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+  function handlePayment() {
+    clearCart();
+    navigate("/thank-you");
+  }
 
   return (
     <div className="container mt-4">
       <h3 className="mb-3">💳 Checkout</h3>
+
       {cart.length === 0 ? (
         <p>No items in your cart.</p>
       ) : (
@@ -23,7 +29,6 @@ const Checkout = ({ cart }) => {
                     style={{
                       cursor: "pointer",
                       color: "#007bff",
-                      textDecoration: "none",
                       marginRight: "8px",
                     }}
                   >
@@ -35,8 +40,12 @@ const Checkout = ({ cart }) => {
               </li>
             ))}
           </ul>
+
           <h5 className="mb-3">Total: ${total.toFixed(2)}</h5>
-          <button className="btn btn-success w-100" onClick={() => navigate("/thank-you")}>Complete Payment</button>
+
+          <button className="btn btn-success w-100" onClick={handlePayment}>
+            Complete Payment
+          </button>
         </>
       )}
     </div>

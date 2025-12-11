@@ -63,7 +63,9 @@ const Home = ({ cart, increaseQty, decreaseQty }) => {
               <p>No products found.</p>
             ) : (
               currentProducts.map((product) => {
-                const cartItem = cart.find((item) => item.id === product.id);
+                const cartItem = cart.find(
+                  (item) => item.id === product.id || item.external_id == product.id
+                );
                 const quantity = cartItem ? cartItem.quantity : 0;
                 const isOutOfStock = product.stock === 0;
 
